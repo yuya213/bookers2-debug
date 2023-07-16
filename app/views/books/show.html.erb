@@ -18,24 +18,26 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
             <% if @book.user == current_user %>
-            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <% end %>
-            
+
             <% if @book.user == current_user %>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+          <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
-            <td>コメント数：<%= @book.book_comments.count %></td>
+          <td class="book-comments-counter">
+            <%= render "book_comments/counter", book: @book %>
+          </td>
         </tr>
       </table>
-      
+
       <div id="book-comments">
-       <%= render "book_comments/show" , { book: @book , book_comment: @book_comment } %><br>
+       <%= render "book_comments/show" , book: @book %><br>
      </div>
-      
+
       <div id="comment_forms">
        <%= render "book_comments/form" , { book: @book , book_comment: @book_comment } %>
      </div>
-     
+
     </div>
   </div>
 </div>
